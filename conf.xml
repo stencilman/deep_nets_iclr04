@@ -1,0 +1,150 @@
+<conf>
+    <learning_rate>0.1</learning_rate>
+    <epoch_no>0</epoch_no>  
+    <reg_weight>0.0005</reg_weight>
+    <!-- to turn off Momentum, use momentum = 0.0 (def 0.0) -->
+    <momentum>0.9</momentum>
+    <!-- to turn off RMSPROP, use filter_weight = 0.0 (def 0.9) -->
+    <rmsprop_filter_weight>0.9</rmsprop_filter_weight>
+    <rmsprop_maxgain>100</rmsprop_maxgain>
+    <rmsprop_mingain>0.1</rmsprop_mingain>
+    <!-- to turn off neg mining, use hard_mine_freq = 100000 (def 50) -->
+    <hard_mine_freq>50</hard_mine_freq>
+    <!-- The postive:negative ratio. Use 1:1 for equal mixture -->
+    <mix_ratio>
+	    <train>1:1</train>
+	    <test>1:1</test>
+	</mix_ratio>
+    <mix_ratio_test>1:1</mix_ratio_test>
+    <test_dir>data/FLIC/processed_data/test</test_dir>
+    <log_filename>training_log_r1.txt</log_filename>
+    <test_thresh>5</test_thresh>
+    <n_epochs>10000000</n_epochs>
+    <n_iters>10000000</n_iters>
+    <batch_size>128</batch_size>
+    <!-- Use perturb to jitter training data -->
+    <perturb>False</perturb>
+    <pnt_no>3</pnt_no>  
+    <layers>
+        <layer>
+            <type>InputLayerSW</type>   
+            
+            <windowshape>
+                <h>64</h>
+                <w>64</w>
+                <d>3</d>
+            </windowshape>
+            
+            <negative_examples_per_img>10</negative_examples_per_img>
+            
+            <preprocessing>lcn</preprocessing>
+            <prepro_dir>data/FLIC/models/v2_wri_r1/</prepro_dir>
+            <data>
+                <dir>data/FLIC/processed_data/train</dir>
+                <percent>1.0,0.0,0.0</percent>
+            </data>
+            <data>
+                <dir>data/FLIC/processed_data/test</dir>
+                <percent>0.0,0.0,1.0</percent>
+            </data>
+            <log>True</log>
+        </layer>
+        <!--
+        <layer>
+            <id>2</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>    
+        -->
+        <layer>
+            <id>3</id>
+            <type>ConvPoolLayer</type>      
+            <nos_filters>16</nos_filters>
+            <filter_size>5</filter_size>
+            <pool_size>2</pool_size>
+            <log>True</log>
+            <log_output>True</log_output>
+        </layer>
+        <!--
+        <layer>
+            <id>4</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>
+        -->
+        <layer>
+            <id>5</id>
+            <type>ConvPoolLayer</type>      
+            <nos_filters>32</nos_filters>
+            <filter_size>5</filter_size>
+            <pool_size>2</pool_size>
+            <log>True</log>
+            <log_output>False</log_output>
+        </layer>
+        <!--    
+        <layer>
+            <id>6</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>
+        -->
+        <layer>
+            <id>7</id>
+            <type>ConvPoolLayer</type>      
+            <nos_filters>32</nos_filters>
+            <filter_size>5</filter_size>
+            <pool_size>1</pool_size>
+            <log_output>False</log_output>
+        </layer>
+        <!--
+        <layer>
+            <id>8</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>
+        -->
+        <layer>
+            <id>9</id>
+            <type>OutputLayer</type>
+            <no_states>500</no_states>
+        </layer>
+        <!--
+        <layer>
+            <id>10</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>
+        -->
+        <layer>
+            <id>11</id>
+            <type>OutputLayer</type>
+            <no_states>100</no_states>
+        </layer>
+        <!--
+        <layer>
+            <id>12</id>
+            <type>DropoutLayer</type>
+            <prob>0.5</prob>
+        </layer>
+        -->
+
+        <layer>
+            <id>13</id>
+            <type>SoftMaxLayer</type>
+            <log>True</log>
+        </layer>
+    </layers>
+        
+    <init>
+        <type>random</type>
+        <weights_dir>data/FLIC/models/v2_wri_r1/</weights_dir>
+    </init>
+    
+    <logging>
+        <output_dir>data/FLIC/models/v2_wri_r1/</output_dir>
+        <!-- shared output includes pre-processed 'Data_part*' files -->
+        <shared_output_dir>data/FLIC/models/shared_data_bp3/</shared_output_dir>
+    </logging>
+
+</conf>
+
