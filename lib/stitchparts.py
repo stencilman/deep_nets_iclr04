@@ -72,9 +72,9 @@ class StichHeapMaps(object):
         
     def __init__(self):
         margin = 125
-        self.sho_given_elb = plt.imread('../matlab/peaky_filters/sho_given_elb.png')[margin:-margin, margin:-margin]
-        self.elb_given_wri = plt.imread('../matlab/peaky_filters/elb_given_wri.png')[margin:-margin, margin:-margin]
-        self.fac_given_sho = plt.imread('../matlab/peaky_filters/fac_given_sho.png')[margin:-margin, margin:-margin]
+        self.sho_given_elb = plt.imread('../data/priors/sho_given_elb.png')[margin:-margin, margin:-margin]
+        self.elb_given_wri = plt.imread('../data/priors/elb_given_wri.png')[margin:-margin, margin:-margin]
+        self.fac_given_sho = plt.imread('../data/priors/fac_given_sho.png')[margin:-margin, margin:-margin]
         
         # TODO: Play with shrink / dialate filters here.
         
@@ -83,7 +83,7 @@ class StichHeapMaps(object):
 #         self.fac_given_sho[30:65, 30:65] = 1.0
 
         
-        self.face_global_prior_torso_space = plt.imread('../matlab/face_global_prior_torso_space.png')
+        self.face_global_prior_torso_space = plt.imread('../data/priors/face_global_prior_torso_space.png')
         
         self.wri_given_elb = numpy.rot90(self.elb_given_wri, 2)
         self.elb_given_sho = numpy.rot90(self.sho_given_elb, 2)
@@ -125,9 +125,9 @@ class StichHeapMaps(object):
                     max_loc = numpy.unravel_index(self.HMap[part][i, 0, :, :].argmax(), self.HMap[part][i, 0, :, :].shape)
                     plt.imshow(self.HMap[part][i, 0, :, :])
                     plt.title(part)
-                    plt.imsave('/home/jonathan/MODEC/cropped-images/hmap_nosm/' + fname + '_' + part + '.png', self.HMap[part][i, 0, :, :])
+                    plt.imsave('/home/user/MODEC/cropped-images/hmap_nosm/' + fname + '_' + part + '.png', self.HMap[part][i, 0, :, :])
                     plt.show()
-                    im = plt.imread('/home/jonathan/MODEC/cropped-images/' + fname + '.png')
+                    im = plt.imread('/home/user/MODEC/cropped-images/' + fname + '.png')
                     plt.imshow(im)
                     plt.scatter((max_loc[1]) * 4.0 / scale, (max_loc[0]) * 4.0 / scale)
                     plt.title(part)
@@ -187,7 +187,7 @@ epoch = 400
 scale = scales[curr_sc_no]
 file = '*.npy'
 # file = 'american-wedding-unrated6x9-00086711*.npy'
-vals = ['/home/jonathan/Projects/deep_nets/fullset_multiscale_heatmap_negmoff/' + part + '_dec27/FLIC-sapp-all_sc_' + str(scale) + '_ep_' + str(epoch) + '/' + file for part in keys]
+vals = ['/home/user/Projects/deep_nets/fullset_multiscale_heatmap_negmoff/' + part + '_dec27/FLIC-sapp-all_sc_' + str(scale) + '_ep_' + str(epoch) + '/' + file for part in keys]
 print vals
 shm = StichHeapMaps()
 shm.load_data(dirs=(keys, vals), scale=scale)
@@ -293,6 +293,6 @@ for part in ['wri', 'elb', 'sho', 'fac']:
         if not server:
             plt.imshow(distribution[i, 0, :, :])
             plt.title(part)
-            plt.imsave('/home/jonathan/MODEC/cropped-images/hmap_sm/' + fname + '_' + part + '.png', distribution[i, 0, :, :])
+            plt.imsave('/home/user/MODEC/cropped-images/hmap_sm/' + fname + '_' + part + '.png', distribution[i, 0, :, :])
             plt.show()
 

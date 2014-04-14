@@ -232,16 +232,6 @@ def run_command(command_line):
             sys.stdout.write('\r' + output)       
             sys.stdout.flush()
             
-def download_file_nyu(sourcepath, local_dir):
-    
-    if os.path.exists(local_dir + re.split(r'[\\/]+', sourcepath)[-1]):
-        print 'File already exists'
-        return
-    
-    print 'Please be patient, downloading big files from ajain@nyu. Progress will be displayed shortly.'
-    command_line = 'rsync -r -v --progress -e ssh ajain@access.cims.nyu.edu:{0:s} {1:s}'.format(sourcepath, local_dir)    
-    run_command(command_line)        
-
 def unzip(zipfilepath, local_dir):   
     print 'Unzipiing files into ' + local_dir
     command_line = 'unzip ' + zipfilepath + ' -d ' + local_dir            
@@ -300,8 +290,6 @@ def pickle_load(filepath):
         raise IOError
     return var
 
-
-        
 def pad_all_side_one_channel(im, pad_size, border):
     # create new image
     new_im = np.zeros((im.shape[0] + 2 * pad_size, im.shape[1] + 2 * pad_size), dtype=im.dtype)
@@ -379,10 +367,7 @@ def get_gpu_fit_size(X, already_alloc_mem=0):
             # gpu_size = {d_type:int(X[d_type].shape[0] * red_ratio) for d_type in d_types}
     return gpu_size
 
-    
-    
 def gaussian_filter(kernel_shape):
-
     x = np.zeros((kernel_shape, kernel_shape), dtype='float32')
 
     def gauss(x, y, sigma=2.0):

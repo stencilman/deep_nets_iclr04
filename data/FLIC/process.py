@@ -12,7 +12,7 @@ import data_processing
 if not os.path.exists('unprocessed_data'):
     os.makedirs('unprocessed_data')
 
-tools.download_file_nyu('/home/ajain/data/Data/FLIC_data/train/full-images.zip', 'unprocessed_data/')
+tools.run_command('wget -P unprocessed_data http://vajra.cs.nyu.edu/iclr04/full-images.zip')
 
 if not os.path.exists('unprocessed_data/full-images/the-departed-00207091_05003.jpg'):
     tools.run_command('unzip unprocessed_data/full-images.zip -d unprocessed_data')
