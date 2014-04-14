@@ -27,7 +27,7 @@ from collections import defaultdict
 import tools
 import alfileformat as al
 from layer_blocks import ConvPoolLayer, OutputLayer, InputLayerSW, \
-    SoftMaxLayer, SVMLayer, DropoutLayer
+    SoftMaxLayer, DropoutLayer
 
 class Machine(object):    
     layer_map = {
@@ -35,7 +35,6 @@ class Machine(object):
       'ConvPoolLayer' : ConvPoolLayer,
       'OutputLayer' : OutputLayer,
       'SoftMaxLayer': SoftMaxLayer,
-      'SVMLayer' : SVMLayer,
       'DropoutLayer' : DropoutLayer,
       }
     

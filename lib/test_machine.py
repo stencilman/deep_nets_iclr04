@@ -219,7 +219,7 @@ class TestMachine(Machine):
         
         self.get_output_sw_op = theano.function([], self.layers[-1].output,
                     givens={self.conv_out_gpu: self.conv_out_data_gpu})
-        if self.layers[-1].type == 'SoftMaxLayer' or self.layers[-1].type == 'SVMLayer':
+        if self.layers[-1].type == 'SoftMaxLayer':
             self.get_output_sw_conf = theano.function([], self.layers[-1].confidence,
                     givens={self.conv_out_gpu: self.conv_out_data_gpu})
         
