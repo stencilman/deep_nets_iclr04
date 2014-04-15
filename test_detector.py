@@ -35,7 +35,7 @@ def main():
     params.load_weights = True
     params.class_name = 'TestMachineSW'
     
-    # create training machine    
+    # create testing machine    
     machine = TestMachine(params)
     # run machine    
     machine.compute(params)
