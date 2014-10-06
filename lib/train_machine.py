@@ -27,7 +27,7 @@ class TrainMachine(Machine):
             self.cost = -T.mean(T.log(self.layers[-1].p_y_given_x)[T.arange(self.y.shape[0]), T.cast(self.y, 'int32')])
             self.cost_sans_reg = -T.mean(T.log(self.layers[-1].p_y_given_x)[T.arange(self.y.shape[0]), T.cast(self.y, 'int32')])
         else:
-            self.cost = self.layers[-1].svm_cost(self.y)  # T.mean(T.nnet.binary_crossentropy(self.layers[-1].output.flatten(), self.y)) #((self.y - self.layers[-1].output.flatten()) ** 2).sum()            
+            T.mean(T.nnet.binary_crossentropy(self.layers[-1].output.flatten(), self.y)) #((self.y - self.layers[-1].output.flatten()) ** 2).sum()            
 
     	print 'Regularization: ' + str(params.reg_weight)
         
