@@ -27,7 +27,7 @@ class TrainMachine(Machine):
             self.cost = -T.mean(T.log(self.layers[-1].p_y_given_x)[T.arange(self.y.shape[0]), T.cast(self.y, 'int32')])
             self.cost_sans_reg = -T.mean(T.log(self.layers[-1].p_y_given_x)[T.arange(self.y.shape[0]), T.cast(self.y, 'int32')])
         else:
-            T.mean(T.nnet.binary_crossentropy(self.layers[-1].output.flatten(), self.y)) #((self.y - self.layers[-1].output.flatten()) ** 2).sum()            
+            raise "Only SoftMaxLayer output supported"
 
     	print 'Regularization: ' + str(params.reg_weight)
         
